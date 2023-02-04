@@ -1,0 +1,63 @@
+#att_zone {
+  max-width: 615px;
+  min-height: 150px;
+  padding: 10px;
+  border: 1px dotted #000;
+  border-radius: 0.25rem;
+}
+
+#att_zone:empty:before {
+  content: attr(data-placeholder);
+  color: #999;
+  font-size: 0.9em;
+}
+
+#btnAtt {
+  margin: 10px 0px;
+}
+body {
+  min-height: 100vh;
+
+  background: -webkit-gradient(
+    linear,
+    left bottom,
+    right top,
+    from(#ffdcff),
+    to(#ffebf0)
+  );
+  background: -webkit-linear-gradient(
+    bottom left,
+    #ffdcff 0%,
+    #ffebf0 100%
+  );
+  background: -moz-linear-gradient(bottom left, #ffdcff 0%, #ffebf0 100%);
+  background: -o-linear-gradient(bottom left, #ffdcff 0%, #ffebf0 100%);
+  background: linear-gradient(to top right, #ffdcff 0%, #ffebf0 100%);
+}
+
+.input-form {
+  max-width: 680px;
+
+  margin-top: 80px;
+  padding: 32px;
+
+  background: #fff;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  height: 100px;
+
+}
+.logo-img {
+  width: 430px;
+  height: auto;
+  object-fit: contain;
+}

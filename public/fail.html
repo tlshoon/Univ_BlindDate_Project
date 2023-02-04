@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>가대시그널</title>
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    
+  </head>
+
+  <style>
+    .nav {
+      display: flex;
+      justify-content: center;
+      height: 100px;
+    }
+    .logo-img {
+      width: 430px;
+      height: auto;
+      object-fit: contain;
+    }
+    body {
+      min-height: 100vh;
+
+      background: -webkit-gradient(
+        linear,
+        left bottom,
+        right top,
+        from(#ffdcff),
+        to(#ffebf0)
+      );
+      background: -webkit-linear-gradient(
+        bottom left,
+        #ffdcff 0%,
+        #ffebf0 100%
+      );
+      background: -moz-linear-gradient(bottom left, #ffdcff 0%, #ffebf0 100%);
+      background: -o-linear-gradient(bottom left, #ffdcff 0%, #ffebf0 100%);
+      background: linear-gradient(to top right, #ffdcff 0%, #ffebf0 100%);
+    }
+    .input-form {
+      
+      min-width: 760px;
+
+      margin-top: 80px;
+      padding: 32px;
+
+      background: #fff;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 10px;
+      -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+      -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+      box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+    }
+  </style>
+
+  <body>
+    <div class="nav">
+      <img
+        class="logo-img"
+        src="https://velog.velcdn.com/images/sjhh0105/post/494bc800-54ca-4fdb-8359-a3d3b148a988/image.png"
+        onClick="window.location.reload()"
+      />
+    </div>
+
+    <div class="container">
+      <div class="input-form-backgroud row">
+        <div class="input-form col-md-8 mx-auto">
+          <div class="row" style="display: flex; justify-content: center">
+            <h2 style="margin-bottom: 0px">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="30"
+                height="30"
+                fill="currentColor"
+                class="bi bi-check-circle-fill"
+                viewBox="0 0 16 16"
+                style="margin: 0px 4px 7px 0px"
+              >
+                <path
+                  d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"
+                />
+              </svg>
+              제출에 실패하였습니다. 다시 제출해주시기 바랍니다.
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div style="padding: 70px 0px 20px 0px">
+      <footer class="text-center text-small">
+        <p class="mb-1">&copy; 2022 Catholic Univ. Matching Project</p>
+      </footer>
+    </div> -->
+  </body>
+</html>

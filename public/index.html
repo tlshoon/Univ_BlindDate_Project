@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>가대시그널</title>
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="app.css" />
+  </head>
+
+  <body>
+    <script src="/__/firebase/8.6.5/firebase-app.js"></script>
+    <script src="/__/firebase/8.6.5/firebase-auth.js"></script>
+    <script src="/__/firebase/8.6.5/firebase-firestore.js"></script>
+    <script src="/__/firebase/8.6.5/firebase-storage.js"></script>
+
+    <script>
+      var firebaseConfig = {
+        apiKey: "AIzaSyAYe-6d1TJdEniNr3ir1Jz45V_z17EHQ-4",
+        authDomain: "matchingpj-358d7.firebaseapp.com",
+        projectId: "matchingpj-358d7",
+        storageBucket: "matchingpj-358d7.appspot.com",
+        messagingSenderId: "1093069578633",
+        appId: "1:1093069578633:web:ce972c7eca2eff4f654158",
+      };
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <script
+      src="https://code.jquery.com/jquery-3.6.3.min.js"
+      integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+      crossorigin="anonymous"
+    ></script>
+
+    <div class="nav">
+      <img
+        class="logo-img"
+        src="https://velog.velcdn.com/images/sjhh0105/post/494bc800-54ca-4fdb-8359-a3d3b148a988/image.png"
+        onClick="window.location.reload()"
+      />
+    </div>
+
+    <div class="container">
+      <div class="input-form-backgroud row">
+        <div class="input-form col-md-12 mx-auto">
+          <h4 class="mb-3">프로필 입력</h4>
+          <form>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="name">이름</label>
+                <input type="text" class="form-control" id="name" required />
+                <div class="invalid-feedback">이름을 입력해주세요.</div>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label>나이</label>
+                <input type="number" class="form-control" id="age" require />
+                <div class="invalid-feedback">나이를 입력해주세요.</div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="height">키</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="height"
+                  required
+                />
+                <div class="invalid-feedback">키를 입력해주세요.</div>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label for="name">전공</label>
+                <input type="text" class="form-control" id="major" required />
+                <div class="invalid-feedback">학과를 입력해주세요.</div>
+              </div>
+            </div>
+
+            <div class="row" style="padding-bottom: 5px">
+              <div class="col-md-6 mb-3">
+                <label>카카오톡 ID</label>
+                <input type="text" class="form-control" id="contact" required />
+                <div class="invalid-feedback">카카오톡 ID를 입력해주세요.</div>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label for="address">거주지</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="address"
+                  placeholder="ex) 경기도 부천시"
+                  required
+                />
+                <div class="invalid-feedback">주소를 입력해주세요.</div>
+              </div>
+            </div>
+
+            <div class="row" style="padding-top: 8px">
+              <div class="col-md-6 mb-3">
+                <label>흡연 여부</label>
+                <select id="smoke" style="margin-left: 6px">
+                  <option value="비흡연">비흡연</option>
+                  <option value="흡연">흡연</option>
+                </select>
+              </div>
+            </div>
+
+            <div id="image_preview">
+              <label for="photo" style="margin: 0px">사진</label>
+              <div>
+                <input
+                  class="user_img"
+                  type="file"
+                  id="btnAtt"
+                  multiple="multiple"
+                  required
+                />
+                <div
+                  id="att_zone"
+                  data-placeholder="파일을 첨부 하려면 파일 선택 버튼을 클릭하거나 파일을 드래그앤드롭 하세요."
+                ></div>
+              </div>
+
+              <div class="column">
+                <div style="padding: 20px 0px">
+                  <label for="name">본인의 성격과 이상형</label>
+                  <textarea
+                    class="form-control"
+                    id="idol"
+                    placeholder="본인의 성격과 매칭을 원하는 이상형을 입력해주세요."
+                    style="max-width: 615px; min-height: 200px"
+                    required
+                  ></textarea>
+                </div>
+
+                <div">
+                <label for="age">비희망 타입</label>
+                <textarea
+                  class="form-control"
+                  id="notidol"
+                  style="max-width: 615px; min-height: 200px"
+                  placeholder="매칭을 비희망하는 타입을 입력해주세요. ex) 같은 과..."
+                  required
+                ></textarea>
+              </div>
+            </div>
+
+            <hr class="mb-4" />
+            <div class="custom-control custom-checkbox">
+              <input
+                type="checkbox"
+                class="custom-control-input"
+                id="aggrement"
+                required
+              />
+              <label class="custom-control-label" for="aggrement"
+                >개인정보 수집 및 이용에 동의합니다.</label
+              >
+            </div>
+
+            <div class="mb-4"></div>
+            <button
+              class="btn btn-lg btn-block"
+              style="background-color: #f7eff7"
+              type="button"
+              id="send"
+            >
+              제출 완료
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div style="padding: 70px 0px 20px 0px">
+        <footer class="text-center text-small">
+          <p class="mb-1">&copy; 2022 Catholic Univ. Matching Project</p>
+        </footer>
+      </div>
+    </div>
+
+    <script>
+      window.addEventListener(
+        "load",
+        () => {
+          const forms = document.getElementsByClassName("validation-form");
+
+          Array.prototype.filter.call(forms, (form) => {
+            form.addEventListener(
+              "submit",
+              function (event) {
+                if (form.checkValidity() === false) {
+                  event.preventDefault();
+                  event.stopPropagation();
+                }
+
+                form.classList.add("was-validated");
+              },
+              false
+            );
+          });
+        },
+        false
+      );
+    </script>
+
+    <!-- 이미지 드래그앤드랍 -->
+    <script>
+      /* att_zone : 이미지들이 들어갈 위치 id, btn : file tag id */
+      (imageView = function imageView(att_zone, btn) {
+        var attZone = document.getElementById(att_zone);
+        var btnAtt = document.getElementById(btn);
+        var sel_files = [];
+
+        // 이미지와 체크 박스를 감싸고 있는 div 속성
+        var div_style =
+          "display:inline-block;position:relative;" +
+          "width:150px;height:120px;margin:5px;border:1px solid #00f;z-index:1";
+        // 미리보기 이미지 속성
+        var img_style = "width:100%;height:100%;z-index:none";
+        // 이미지안에 표시되는 체크박스의 속성
+        var chk_style =
+          "width:30px;height:30px;position:absolute;" +
+          "right:0px;bottom:0px;z-index:999;color:#f00";
+
+        btnAtt.onchange = function (e) {
+          var files = e.target.files;
+          var fileArr = Array.prototype.slice.call(files);
+          for (f of fileArr) {
+            imageLoader(f);
+          }
+        };
+
+        // 탐색기에서 드래그앤 드롭 사용
+        attZone.addEventListener(
+          "dragenter",
+          function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+          },
+          false
+        );
+
+        attZone.addEventListener(
+          "dragover",
+          function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+          },
+          false
+        );
+
+        attZone.addEventListener(
+          "drop",
+          function (e) {
+            var files = {};
+            e.preventDefault();
+            e.stopPropagation();
+            var dt = e.dataTransfer;
+            files = dt.files;
+            for (f of files) {
+              imageLoader(f);
+            }
+          },
+          false
+        );
+
+        /*첨부된 이미리즐을 배열에 넣고 미리보기 */
+        imageLoader = function (file) {
+          sel_files.push(file);
+          var reader = new FileReader();
+          reader.onload = function (ee) {
+            let img = document.createElement("img");
+            img.setAttribute("style", img_style);
+            img.src = ee.target.result;
+            attZone.appendChild(makeDiv(img, file));
+          };
+
+          reader.readAsDataURL(file);
+        };
+
+        /*첨부된 파일이 있는 경우 checkbox와 함께 attZone에 추가할 div를 만들어 반환 */
+        makeDiv = function (img, file) {
+          var div = document.createElement("div");
+          div.setAttribute("style", div_style);
+
+          var btn = document.createElement("input");
+          btn.setAttribute("type", "button");
+          btn.setAttribute("value", "x");
+          btn.setAttribute("delFile", file.name);
+          btn.setAttribute("style", chk_style);
+          btn.onclick = function (ev) {
+            var ele = ev.srcElement;
+            var delFile = ele.getAttribute("delFile");
+            for (var i = 0; i < sel_files.length; i++) {
+              if (delFile == sel_files[i].name) {
+                sel_files.splice(i, 1);
+              }
+            }
+
+            dt = new DataTransfer();
+            for (f in sel_files) {
+              var file = sel_files[f];
+              dt.items.add(file);
+            }
+            btnAtt.files = dt.files;
+            var p = ele.parentNode;
+            attZone.removeChild(p);
+          };
+          div.appendChild(img);
+          div.appendChild(btn);
+          return div;
+        };
+      })("att_zone", "btnAtt");
+    </script>
+
+    <script>
+      const db = firebase.firestore();
+      const storage = firebase.storage();
+
+      $("#send").click(async () => {
+        if (document.querySelector("#btnAtt").files[0]) {
+          var file = await document.querySelector("#btnAtt").files[0];
+          var storageRef = storage.ref();
+          var save = storageRef.child("image/" + file.name);
+          var upload = save.put(file);
+        }
+
+        if (document.querySelector("#btnAtt").files[1]) {
+          var file1 = await document.querySelector("#btnAtt").files[1];
+          var storageRef1 = storage.ref();
+          var save1 = storageRef1.child("image/" + file1.name);
+          var upload1 = save1.put(file1);
+        }
+
+        if (document.querySelector("#btnAtt").files[2]) {
+          var file2 = await document.querySelector("#btnAtt").files[2];
+          var storageRef2 = storage.ref();
+          var save2 = storageRef2.child("image/" + file2.name);
+          var upload2 = save2.put(file2);
+        }
+
+        upload.on(
+          "state_changed",
+          // 변화시 동작하는 함수
+          null,
+          //에러시 동작하는 함수
+          (error) => {
+            console.error("실패", error);
+          },
+          // 성공시 동작하는 함수
+          () => {
+            upload.snapshot.ref.getDownloadURL().then((url) => {
+              upload1.snapshot.ref.getDownloadURL().then((url1) => {
+                upload2.snapshot.ref.getDownloadURL().then((url2) => {
+                    console.log("업로드된 경로", url, url1, url2);
+
+                    var md = {
+                      이름: $("#name").val(),
+                      나이: $("#age").val(),
+                      전공: $("#major").val(),
+                      카톡: $("#contact").val(),
+                      키: $("#height").val(),
+                      거주지: $("#address").val(),
+                      이상형: $("#idol").val(),
+                      매칭X: $("#notidol").val(),
+                      흡연여부: $("#smoke").val(),
+                      이미지1: url,
+                      이미지2: url1,
+                      이미지3: url2,
+                    };
+
+                    db.collection("회원")
+                      .add(md)
+                      .then(() => {
+                        window.location.href = "/success.html";
+                      })
+                      .catch(() => {
+                        window.location.href = "/fail.html";
+                      });
+                  }); 
+              });           
+            });
+          }
+        );
+      });
+
+      // 데이터 가져오기
+      // db.collection('회원').get().then((results) => {
+      //   results.forEach((doc) => {
+      //     console.log(doc.data().이름)
+      //   });
+      // })
+    </script>
+  </body>
+</html>
