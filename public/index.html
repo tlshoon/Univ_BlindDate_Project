@@ -329,27 +329,11 @@
       const db = firebase.firestore();
       const storage = firebase.storage();
 
-      $("#send").click(async () => {
-        if (document.querySelector("#btnAtt").files[0]) {
-          var file = await document.querySelector("#btnAtt").files[0];
-          var storageRef = storage.ref();
-          var save = storageRef.child("image/" + file.name);
-          var upload = save.put(file);
-        }
-
-        if (document.querySelector("#btnAtt").files[1]) {
-          var file1 = await document.querySelector("#btnAtt").files[1];
-          var storageRef1 = storage.ref();
-          var save1 = storageRef1.child("image/" + file1.name);
-          var upload1 = save1.put(file1);
-        }
-
-        if (document.querySelector("#btnAtt").files[2]) {
-          var file2 = await document.querySelector("#btnAtt").files[2];
-          var storageRef2 = storage.ref();
-          var save2 = storageRef2.child("image/" + file2.name);
-          var upload2 = save2.put(file2);
-        }
+      $("#send").click(function () {
+        var file = document.querySelector("#btnAtt").files[0];
+        var storageRef = storage.ref();
+        var save = storageRef.child('image/' + file.name);
+        var upload = save.put(file);
 
         upload.on(
           "state_changed",
@@ -362,39 +346,33 @@
           // 성공시 동작하는 함수
           () => {
             upload.snapshot.ref.getDownloadURL().then((url) => {
-              upload1.snapshot.ref.getDownloadURL().then((url1) => {
-                upload2.snapshot.ref.getDownloadURL().then((url2) => {
-                    console.log("업로드된 경로", url, url1, url2);
+              console.log("업로드된 경로", url);
 
-                    var md = {
-                      이름: $("#name").val(),
-                      나이: $("#age").val(),
-                      전공: $("#major").val(),
-                      카톡: $("#contact").val(),
-                      키: $("#height").val(),
-                      거주지: $("#address").val(),
-                      이상형: $("#idol").val(),
-                      매칭X: $("#notidol").val(),
-                      흡연여부: $("#smoke").val(),
-                      이미지1: url,
-                      이미지2: url1,
-                      이미지3: url2,
-                    };
+              var md = {
+                이름: $("#name").val(),
+                나이: $("#age").val(),
+                전공: $("#major").val(),
+                카톡: $("#contact").val(),
+                키: $("#height").val(),
+                거주지: $("#address").val(),
+                이상형: $("#idol").val(),
+                매칭X: $("#notidol").val(),
+                흡연여부: $("#smoke").val(),
+                이미지: url,
+              };
 
-                    db.collection("회원")
-                      .add(md)
-                      .then(() => {
-                        window.location.href = "/success.html";
-                      })
-                      .catch(() => {
-                        window.location.href = "/fail.html";
-                      });
-                  }); 
-              });           
+              db.collection("회원")
+                .add(md)
+                .then((result) => {
+                  window.location.href = "/success.html";
+                })
+                .catch((err) => {
+                  window.location.href = "/fail.html";
+                });
             });
           }
         );
-      });
+        })
 
       // 데이터 가져오기
       // db.collection('회원').get().then((results) => {
